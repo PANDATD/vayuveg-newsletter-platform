@@ -1,1 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ brand_name }} · Magazine</title>
+    </head>
+    <body>
+        <h2>{{ edition_title }}</h2>
+        <p>{{ published_date }} · Issue {{ issue_number }}</p>
+        <p>{{ address }}</p>
 
+        <hr />
+
+        {% if articles %}
+        <!-- Lead article -->
+        <h1>{{ articles[0].title }}</h1>
+        <div>{{ articles[0].summary | safe }}</div>
+
+        <hr />
+
+        <!-- Remaining articles -->
+        {% for article in articles[1:] %}
+        <h3>{{ article.title }}</h3>
+        <div>{{ article.summary | safe }}</div>
+
+        {% if article.image %}
+        <img src="{{ article.image }}" width="100%" />
+        {% endif %}
+
+        <p><a href="{{ article.url }}">Read more</a></p>
+        <hr />
+        {% endfor %} {% endif %}
+
+        <p>
+            <a href="{{ unsubscribe_url }}">Unsubscribe</a>
+        </p>
+    </body>
+</html>
