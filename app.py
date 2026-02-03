@@ -1,12 +1,6 @@
 """
-VAYUVEG Newsletter Builder – Clean Flask Core
-
-Design goals:
-- One render file per theme
-- No partials, no includes
-- Editor is form-only
-- Preview and Generate share same renderer
-- Stateless (no DB for now)
+Newsletter Builder – Clean Flask Core
+Supports VAYUVEG + ShodhSetu from one engine
 """
 
 from __future__ import annotations
@@ -20,7 +14,11 @@ from markupsafe import escape
 
 app = Flask(__name__)
 
-AVAILABLE_THEMES = {"classic", "magazine", "saffron", "Shodsetu"}
+# -------------------------------------------------------------------
+# CONFIG
+# -------------------------------------------------------------------
+
+AVAILABLE_THEMES = {"classic", "magazine", "saffron", "shodhsetu"}
 DEFAULT_THEME = "classic"
 
 BRANDS = {
@@ -36,21 +34,19 @@ BRANDS = {
     },
 }
 
+# -------------------------------------------------------------------
+# HELPERS
+# -------------------------------------------------------------------
 
-def resolve_brand(value: str | None) -> str:
+def resolve_brand(value: Optional[str]) -> str:
     return value if value in BRANDS else "vayuveg"
 
 
 def resolve_theme(value: Optional[str]) -> str:
-    """Ensure only allowed themes are rendered."""
     return value if value in AVAILABLE_THEMES else DEFAULT_THEME
 
 
 def _getlist_fallback(form, *names: str) -> List[str]:
-    """
-    Return the first non-empty getlist among candidate field names.
-    Keeps backward-compatibility with older editor field names.
-    """
     for name in names:
         values = form.getlist(name)
         if values and any(v.strip() for v in values):
@@ -59,13 +55,6 @@ def _getlist_fallback(form, *names: str) -> List[str]:
 
 
 def parse_articles(form) -> List[Dict[str, str]]:
-    """
-    Preferred field names:
-      - title, summary, image, url
-
-    Backward-compatible aliases:
-      - desc (summary), img (image), link (url)
-    """
     articles: List[Dict[str, str]] = []
 
     titles = _getlist_fallback(form, "title")
@@ -98,20 +87,17 @@ def render_newsletter(brand: str, theme: str, articles: list[dict[str, str]]):
 
     return render_template(
         template_path,
-        # ---- Brand ----
         brand_name=brand_cfg["brand_name"],
         site_url=brand_cfg["site_url"],
         logo_url=brand_cfg["logo_url"],
-
-        # ---- Meta ----
         current_year=2026,
         unsubscribe_url="[UNSUBSCRIBE_URL]",
-
-        # ---- Content ----
         articles=articles,
     )
 
-
+# -------------------------------------------------------------------
+# ROUTES
+# -------------------------------------------------------------------
 
 @app.route("/")
 def dashboard():
@@ -123,27 +109,14 @@ def editor():
     return render_template("editor.html")
 
 
-@app.route("/export", methods=["POST"])
-def export():
-    """
-    Export the newsletter as a downloadable HTML file.
-    Uses the same render path as preview/generate.
-    """
+@app.route("/preview", methods=["POST"])
+def preview():
+    brand = resolve_brand(request.form.get("brand"))
     theme = resolve_theme(request.form.get("theme"))
     articles = parse_articles(request.form)
 
-    if not articles:
-        abort(400, "No articles to export")
-
-    html = render_newsletter(theme, articles)
-
-    response = make_response(html)
-    response.headers["Content-Type"] = "text/html; charset=utf-8"
-    response.headers["Content-Disposition"] = (
-        'attachment; filename="vayuveg-newsletter.html"'
-    )
-
-    return response
+    # preview should never hard-fail while typing
+    return render_newsletter(brand, theme, articles)
 
 
 @app.route("/export", methods=["POST"])
@@ -165,17 +138,16 @@ def export():
     return response
 
 
-
-
 @app.route("/generate", methods=["POST"])
 def generate():
+    brand = resolve_brand(request.form.get("brand"))
     theme = resolve_theme(request.form.get("theme"))
     articles = parse_articles(request.form)
 
     if not articles:
         abort(400, "No articles provided")
 
-    return render_newsletter(theme, articles)
+    return render_newsletter(brand, theme, articles)
 
 
 @app.route("/health")
