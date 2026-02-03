@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,9 +12,7 @@
     /* =========================================================
        RESET (Email-safe)
     ========================================================= */
-    body,
-    table,
-    td {
+    body, table, td {
       margin: 0;
       padding: 0;
       border: 0;
@@ -34,43 +31,22 @@
 
     a {
       text-decoration: none;
+      color: inherit;
     }
 
     /* =========================================================
-       BRAND TOKENS — ShodhSetu (Academic)
-    ========================================================= */
-    :root {
-      --ss-blue: #0b4da2;
-      /* Authority / Knowledge */
-      --ss-ink: #111827;
-      /* Primary text */
-      --ss-slate: #374151;
-      /* Body text */
-      --ss-muted: #6b7280;
-      /* Meta / secondary */
-      --ss-line: #e5e7eb;
-      /* Hairline dividers */
-      --ss-bg: #f8fafc;
-      /* Page background */
-      --ss-card: #ffffff;
-      /* Content surface */
-      --ss-accent-bg: #eef6ff;
-      /* Section band */
-    }
-
-    /* =========================================================
-       BASE TYPOGRAPHY
+       SHODHSETU ACADEMIC PALETTE
     ========================================================= */
     body {
       width: 100% !important;
-      background-color: var(--ss-bg);
+      background-color: #f8fafc;
       font-family:
         "Segoe UI",
         "Noto Sans Devanagari",
         "Mangal",
         Arial,
         sans-serif;
-      color: var(--ss-ink);
+      color: #111827;
       font-size: 16px;
       line-height: 1.65;
       -webkit-text-size-adjust: 100%;
@@ -78,65 +54,67 @@
     }
 
     /* =========================================================
-       LAYOUT CONTAINER
+       OUTER WRAPPER
     ========================================================= */
     .wrapper {
       width: 100%;
-      background-color: var(--ss-bg);
+      background-color: #f8fafc;
       padding: 24px 0;
     }
 
+    /* =========================================================
+       MAIN CANVAS
+    ========================================================= */
     .main {
       width: 600px;
       max-width: 600px;
       margin: 0 auto;
-      background-color: var(--ss-card);
-      border-radius: 8px;
+      background-color: #ffffff;
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 1px 4px rgba(17, 24, 39, 0.05);
     }
 
     /* =========================================================
        HEADER (Journal-style)
     ========================================================= */
     .header {
-      padding: 24px 26px 20px;
+      padding: 26px 24px 22px;
       text-align: center;
-      border-bottom: 1px solid var(--ss-line);
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .header-title {
       margin: 8px 0 4px;
       font-size: 18px;
       font-weight: 700;
-      color: var(--ss-blue);
-      letter-spacing: 0.3px;
+      color: #0b4da2;
+      letter-spacing: 0.2px;
     }
 
     .header-sub {
       font-size: 14px;
-      color: var(--ss-muted);
+      color: #6b7280;
     }
 
     /* =========================================================
-       SECTION LABEL
+       SECTION BAND
     ========================================================= */
     .section-label {
-      padding: 12px 26px;
-      background-color: var(--ss-accent-bg);
-      border-left: 4px solid var(--ss-blue);
+      padding: 12px 24px;
+      background-color: #eef6ff;
+      border-left: 4px solid #0b4da2;
       font-size: 14px;
       font-weight: 700;
-      color: var(--ss-blue);
-      letter-spacing: 0.4px;
+      color: #0b4da2;
+      letter-spacing: 0.3px;
     }
 
     /* =========================================================
-       ARTICLES
+       ARTICLE BLOCK
     ========================================================= */
     .article-row {
-      padding: 22px 26px;
-      border-bottom: 1px solid var(--ss-line);
+      padding: 22px 24px;
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .article-image {
@@ -149,14 +127,14 @@
       margin: 0 0 6px;
       font-size: 17px;
       font-weight: 600;
+      color: #0b4da2;
       line-height: 1.45;
-      color: var(--ss-blue);
     }
 
     p {
       margin: 0 0 8px;
       font-size: 15px;
-      color: var(--ss-slate);
+      color: #374151;
       text-align: justify;
     }
 
@@ -165,7 +143,7 @@
       margin-top: 6px;
       font-size: 14px;
       font-weight: 600;
-      color: var(--ss-blue);
+      color: #0b4da2;
     }
 
     /* =========================================================
@@ -180,7 +158,6 @@
         width: 100% !important;
         max-width: 100% !important;
         border-radius: 0;
-        box-shadow: none;
       }
 
       .stack td {
@@ -210,18 +187,15 @@
     }
 
     /* =========================================================
-       DARK MODE (Serious / Academic)
+       DARK MODE (Conservative)
     ========================================================= */
     @media (prefers-color-scheme: dark) {
-
-      body,
-      .wrapper {
+      body, .wrapper {
         background-color: #020617;
       }
 
       .main {
         background-color: #020617;
-        box-shadow: none;
       }
 
       .header {
@@ -234,7 +208,7 @@
         color: #93c5fd;
       }
 
-      h3 {
+      h3, .read-more {
         color: #93c5fd;
       }
 
@@ -244,10 +218,6 @@
 
       .article-row {
         border-bottom-color: #1f2937;
-      }
-
-      .read-more {
-        color: #93c5fd;
       }
     }
   </style>
@@ -260,10 +230,12 @@
 
         <table role="presentation" class="main" width="600">
 
-          <!-- ===== HEADER ===== -->
+          <!-- HEADER -->
           <tr>
             <td class="header">
-              <img src="https://www.shodhsetu.com/Encyc/2025/6/28/Logo-Shodhsetu.png" alt="ShodhSetu" width="160" />
+              <img src="https://www.shodhsetu.com/Encyc/2025/6/28/Logo-Shodhsetu.png"
+                   alt="ShodhSetu"
+                   width="160" />
               <div class="header-title">
                 ShodhSetu Weekly Research Digest
               </div>
@@ -273,14 +245,14 @@
             </td>
           </tr>
 
-          <!-- ===== SECTION LABEL ===== -->
+          <!-- SECTION -->
           <tr>
             <td class="section-label">
               This Week on ShodhSetu
             </td>
           </tr>
 
-          <!-- ===== ARTICLES ===== -->
+          <!-- ARTICLES -->
           {% for article in articles %}
           <tr>
             <td class="article-row">
@@ -288,7 +260,9 @@
                 <tr>
                   <td width="38%" style="vertical-align:top;padding-right:18px;">
                     {% if article.image %}
-                    <img src="{{ article.image }}" alt="{{ article.title }}" class="article-image" />
+                    <img src="{{ article.image }}"
+                         alt="{{ article.title }}"
+                         class="article-image" />
                     {% endif %}
                   </td>
                   <td width="62%" style="vertical-align:top;">
@@ -308,7 +282,7 @@
           </tr>
           {% endfor %}
 
-          <!-- ===== FOOTER ===== -->
+          <!-- FOOTER -->
           <tr>
             <td align="center" style="padding:22px;background-color:#0f172a;">
               <p style="font-size:13px;color:#cbd5e1;margin:0 0 6px;">
@@ -318,7 +292,8 @@
                 </a>
               </p>
               <p style="font-size:13px;margin:0;">
-                <a href="{{ unsubscribe_url }}" style="color:#93c5fd;text-decoration:underline;">
+                <a href="{{ unsubscribe_url }}"
+                   style="color:#93c5fd;text-decoration:underline;">
                   Unsubscribe
                 </a>
               </p>
@@ -330,5 +305,4 @@
     </tr>
   </table>
 </body>
-
 </html>
