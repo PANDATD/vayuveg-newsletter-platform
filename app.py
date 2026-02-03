@@ -84,7 +84,7 @@ def parse_articles(form) -> List[Dict[str, str]]:
 
 def render_newsletter(brand: str, theme: str, articles: list[dict[str, str]]):
     brand_cfg = BRANDS[brand]
-    template_path = f"themes/{theme}/{brand}.html"
+    template_path = f"themes/{theme}/newsletter.html"
 
     return render_template(
         template_path,
