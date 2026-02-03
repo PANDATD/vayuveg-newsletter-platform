@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="supported-color-schemes" content="light" />
+
+  <title>{{ brand_name }} Weekly Digest</title>
+
+  <style type="text/css">
+    /* =========================================================
+       RESET (Email-safe)
+    ========================================================= */
+    body,
+    table,
+    td {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       BRAND TOKENS — ShodhSetu (Academic)
+    ========================================================= */
+    :root {
+      --ss-blue: #0b4da2;
+      /* Authority / Knowledge */
+      --ss-ink: #111827;
+      /* Primary text */
+      --ss-slate: #374151;
+      /* Body text */
+      --ss-muted: #6b7280;
+      /* Meta / secondary */
+      --ss-line: #e5e7eb;
+      /* Hairline dividers */
+      --ss-bg: #f8fafc;
+      /* Page background */
+      --ss-card: #ffffff;
+      /* Content surface */
+      --ss-accent-bg: #eef6ff;
+      /* Section band */
+    }
+
+    /* =========================================================
+       BASE TYPOGRAPHY
+    ========================================================= */
+    body {
+      width: 100% !important;
+      background-color: var(--ss-bg);
+      font-family:
+        "Segoe UI",
+        "Noto Sans Devanagari",
+        "Mangal",
+        Arial,
+        sans-serif;
+      color: var(--ss-ink);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    /* =========================================================
+       LAYOUT CONTAINER
+    ========================================================= */
+    .wrapper {
+      width: 100%;
+      background-color: var(--ss-bg);
+      padding: 24px 0;
+    }
+
+    .main {
+      width: 600px;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: var(--ss-card);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(17, 24, 39, 0.05);
+    }
+
+    /* =========================================================
+       HEADER (Journal-style)
+    ========================================================= */
+    .header {
+      padding: 24px 26px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--ss-line);
+    }
+
+    .header-title {
+      margin: 8px 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ss-blue);
+      letter-spacing: 0.3px;
+    }
+
+    .header-sub {
+      font-size: 14px;
+      color: var(--ss-muted);
+    }
+
+    /* =========================================================
+       SECTION LABEL
+    ========================================================= */
+    .section-label {
+      padding: 12px 26px;
+      background-color: var(--ss-accent-bg);
+      border-left: 4px solid var(--ss-blue);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ss-blue);
+      letter-spacing: 0.4px;
+    }
+
+    /* =========================================================
+       ARTICLES
+    ========================================================= */
+    .article-row {
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--ss-line);
+    }
+
+    .article-image {
+      width: 180px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--ss-blue);
+    }
+
+    p {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: var(--ss-slate);
+      text-align: justify;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ss-blue);
+    }
+
+    /* =========================================================
+       MOBILE REFINEMENT
+    ========================================================= */
+    @media only screen and (max-width: 480px) {
+      .wrapper {
+        padding: 10px 0 !important;
+      }
+
+      .main {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .stack td {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 0 14px 0 !important;
+      }
+
+      .article-image {
+        width: 100% !important;
+        margin: 0 auto 14px !important;
+      }
+
+      p {
+        font-size: 14.5px !important;
+        text-align: left !important;
+      }
+
+      h3 {
+        font-size: 16.5px !important;
+      }
+
+      a {
+        min-height: 44px;
+        display: inline-block;
+      }
+    }
+
+    /* =========================================================
+       DARK MODE (Serious / Academic)
+    ========================================================= */
+    @media (prefers-color-scheme: dark) {
+
+      body,
+      .wrapper {
+        background-color: #020617;
+      }
+
+      .main {
+        background-color: #020617;
+        box-shadow: none;
+      }
+
+      .header {
+        border-bottom-color: #1f2937;
+      }
+
+      .section-label {
+        background-color: #0b1b3a;
+        border-left-color: #93c5fd;
+        color: #93c5fd;
+      }
+
+      h3 {
+        color: #93c5fd;
+      }
+
+      p {
+        color: #d1d5db;
+      }
+
+      .article-row {
+        border-bottom-color: #1f2937;
+      }
+
+      .read-more {
+        color: #93c5fd;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <table role="presentation" width="100%" class="wrapper">
+    <tr>
+      <td align="center">
+
+        <table role="presentation" class="main" width="600">
+
+          <!-- ===== HEADER ===== -->
+          <tr>
+            <td class="header">
+              <img src="https://www.shodhsetu.com/Encyc/2025/6/28/Logo-Shodhsetu.png" alt="ShodhSetu" width="160" />
+              <div class="header-title">
+                ShodhSetu Weekly Research Digest
+              </div>
+              <div class="header-sub">
+                Blogs · Research Updates · Scholarly Articles
+              </div>
+            </td>
+          </tr>
+
+          <!-- ===== SECTION LABEL ===== -->
+          <tr>
+            <td class="section-label">
+              This Week on ShodhSetu
+            </td>
+          </tr>
+
+          <!-- ===== ARTICLES ===== -->
+          {% for article in articles %}
+          <tr>
+            <td class="article-row">
+              <table role="presentation" width="100%" class="stack">
+                <tr>
+                  <td width="38%" style="vertical-align:top;padding-right:18px;">
+                    {% if article.image %}
+                    <img src="{{ article.image }}" alt="{{ article.title }}" class="article-image" />
+                    {% endif %}
+                  </td>
+                  <td width="62%" style="vertical-align:top;">
+                    <h3>
+                      <a href="{{ article.url }}" target="_blank">
+                        {{ article.title }}
+                      </a>
+                    </h3>
+                    <p>{{ article.summary | safe }}</p>
+                    <a href="{{ article.url }}" target="_blank" class="read-more">
+                      Read full article →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% endfor %}
+
+          <!-- ===== FOOTER ===== -->
+          <tr>
+            <td align="center" style="padding:22px;background-color:#0f172a;">
+              <p style="font-size:13px;color:#cbd5e1;margin:0 0 6px;">
+                © {{ current_year }} {{ brand_name }} ·
+                <a href="{{ site_url }}" style="color:#93c5fd;">
+                  {{ site_url }}
+                </a>
+              </p>
+              <p style="font-size:13px;margin:0;">
+                <a href="{{ unsubscribe_url }}" style="color:#93c5fd;text-decoration:underline;">
+                  Unsubscribe
+                </a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
