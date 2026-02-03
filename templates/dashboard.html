@@ -16,9 +16,7 @@
             --radius: 10px;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -29,11 +27,10 @@
         }
 
         .container {
-            max-width: 720px;
+            max-width: 760px;
             margin: 0 auto;
         }
 
-        /* HEADER */
         .header {
             margin-bottom: 28px;
         }
@@ -41,8 +38,8 @@
         .title {
             font-size: 22px;
             font-weight: 700;
-            letter-spacing: 0.3px;
             margin: 0 0 6px;
+            letter-spacing: 0.3px;
         }
 
         .subtitle {
@@ -50,7 +47,6 @@
             color: var(--muted);
         }
 
-        /* CARD */
         .card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -65,7 +61,6 @@
             color: var(--accent);
         }
 
-        /* ACTION LIST */
         .actions {
             list-style: none;
             padding: 0;
@@ -74,19 +69,19 @@
             gap: 12px;
         }
 
-        .actions li a,
-        .actions li span {
+        .actions a,
+        .actions span {
             display: block;
             padding: 14px 16px;
             border-radius: 8px;
             border: 1px solid var(--border);
             background: #fff;
             font-size: 14px;
-            text-decoration: none;
             color: var(--text);
+            text-decoration: none;
         }
 
-        .actions li a:hover {
+        .actions a:hover {
             background: #f3f4f6;
         }
 
@@ -97,16 +92,11 @@
             font-weight: 600;
         }
 
-        .primary a:hover {
-            opacity: 0.95;
-        }
-
         .disabled {
-            color: var(--muted);
             background: #f9fafb;
+            color: var(--muted);
         }
 
-        /* FOOTER */
         .footer {
             margin-top: 28px;
             font-size: 12px;
@@ -114,44 +104,40 @@
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 20px;
-            }
+            body { padding: 20px; }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-            <h1 class="title">Newsletter Builder</h1>
-            <div class="subtitle">
-                Unified engine for VAYUVEG & ShodhSetu · Academic & Editorial Workflows
-            </div>
-        </div>
+<div class="container">
 
-        <!-- MAIN CARD -->
-        <div class="card">
-            <h3>Quick Actions</h3>
-
-            <ul class="actions">
-                <li class="primary">
-                    <a href="/editor">📝 Create Newsletter</a>
-                </li>
-                <li>
-                    <span class="disabled">🎨 Preview Templates (coming soon)</span>
-                </li>
-                <li>
-                    <span class="disabled">📤 Export HTML Archive (coming soon)</span>
-                </li>
-            </ul>
+    <header class="header">
+        <h1 class="title">Newsletter Builder</h1>
+        <div class="subtitle">
+            Unified engine for VAYUVEG & ShodhSetu · Research-grade publishing
         </div>
+    </header>
 
-        <!-- FOOTER -->
-        <div class="footer">
-            © 2026 · Newsletter Platform · Built for research-grade publishing
-        </div>
-    </div>
+    <section class="card">
+        <h3>Quick Actions</h3>
+        <ul class="actions">
+            <li class="primary">
+                <a href="/editor">📝 Create Newsletter</a>
+            </li>
+            <li>
+                <span class="disabled">🎨 Preview Templates (coming soon)</span>
+            </li>
+            <li>
+                <span class="disabled">📤 Export Archive (coming soon)</span>
+            </li>
+        </ul>
+    </section>
+
+    <footer class="footer">
+        © 2026 · Newsletter Platform · Built for academic and editorial workflows
+    </footer>
+
+</div>
 </body>
 </html>
