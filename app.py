@@ -138,19 +138,6 @@ def export():
     )
     return response
 
-
-@app.route("/generate", methods=["POST"])
-def generate():
-    brand = resolve_brand(request.form.get("brand"))
-    theme = resolve_theme(request.form.get("theme"))
-    articles = parse_articles(request.form)
-
-    if not articles:
-        abort(400, "No articles provided")
-
-    return render_newsletter(brand, theme, articles)
-
-
 @app.route("/health")
 def health():
     return {"status": "ok"}
