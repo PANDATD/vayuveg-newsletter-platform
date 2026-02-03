@@ -18,7 +18,8 @@ app = Flask(__name__)
 # CONFIG
 # -------------------------------------------------------------------
 
-AVAILABLE_THEMES = {"classic", "magazine", "saffron", "shodhsetu"}
+AVAILABLE_THEMES = {"classic", "magazine", "saffron", "shodsetu"}
+
 DEFAULT_THEME = "classic"
 
 BRANDS = {
