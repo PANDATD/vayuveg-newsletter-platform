@@ -18,7 +18,8 @@ app = Flask(__name__)
 # CONFIG
 # -------------------------------------------------------------------
 
-AVAILABLE_THEMES = {"classic", "magazine", "saffron", "shodsetu"}
+# FIX: Added the missing "h" to "shodhsetu" so theme matching succeeds
+AVAILABLE_THEMES = {"classic", "magazine", "saffron", "shodhsetu"}
 
 DEFAULT_THEME = "classic"
 
@@ -40,11 +41,20 @@ BRANDS = {
 # -------------------------------------------------------------------
 
 def resolve_brand(value: Optional[str]) -> str:
-    return value if value in BRANDS else "vayuveg"
+    # FIX: Ensure value is cleaned, safe, and lowercased before lookup
+    if value:
+        cleaned_value = str(value).strip().lower()
+        if cleaned_value in BRANDS:
+            return cleaned_value
+    return "vayuveg"
 
 
 def resolve_theme(value: Optional[str]) -> str:
-    return value if value in AVAILABLE_THEMES else DEFAULT_THEME
+    if value:
+        cleaned_theme = str(value).strip().lower()
+        if cleaned_theme in AVAILABLE_THEMES:
+            return cleaned_theme
+    return DEFAULT_THEME
 
 
 def _getlist_fallback(form, *names: str) -> List[str]:
@@ -83,6 +93,7 @@ def parse_articles(form) -> List[Dict[str, str]]:
 
 
 def render_newsletter(brand: str, theme: str, articles: list[dict[str, str]]):
+    # Fetch configurations based on parsed brand string verified key
     brand_cfg = BRANDS[brand]
 
     return render_template(
@@ -116,7 +127,6 @@ def preview():
     theme = resolve_theme(request.form.get("theme"))
     articles = parse_articles(request.form)
 
-    # preview should never hard-fail while typing
     return render_newsletter(brand, theme, articles)
 
 
