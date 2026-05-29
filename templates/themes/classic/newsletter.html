@@ -6,41 +6,104 @@
         <meta name="color-scheme" content="light dark" />
         <meta name="supported-color-schemes" content="light dark" />
         <title>{{ brand_name }} Newsletter</title>
+
+        <style>
+            @media only screen and (max-width: 620px) {
+                .email-wrapper {
+                    padding: 0 !important;
+                }
+
+                .email-container {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    border-radius: 0 !important;
+                    border-left: 0 !important;
+                    border-right: 0 !important;
+                }
+
+                .content-padding {
+                    padding: 22px 18px !important;
+                }
+
+                .article-table,
+                .article-row,
+                .article-cell,
+                .image-cell,
+                .text-cell {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+
+                .image-cell {
+                    padding: 0 0 16px 0 !important;
+                    text-align: center !important;
+                }
+
+                .text-cell {
+                    padding: 0 !important;
+                }
+
+                .article-image {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: auto !important;
+                    margin: 0 auto !important;
+                }
+
+                .article-title {
+                    font-size: 19px !important;
+                    line-height: 1.35 !important;
+                }
+
+                .article-summary {
+                    font-size: 15.5px !important;
+                    line-height: 1.75 !important;
+                    text-align: left !important;
+                }
+
+                .spotify-box {
+                    padding: 18px 16px !important;
+                }
+
+                .footer-links a {
+                    display: inline-block !important;
+                    margin: 4px 6px !important;
+                }
+            }
+        </style>
     </head>
 
-    <body style="margin: 0; padding: 0; width: 100% !important; background-color: #f9fafb; font-family: 'Segoe UI', 'Noto Sans Devanagari', 'Mangal', Arial, sans-serif; color: #374151; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-size: 16px; line-height: 1.7;">
+    <body style="margin: 0; padding: 0; width: 100% !important; background-color: #f3f4f6; font-family: Georgia, 'Times New Roman', 'Noto Sans Devanagari', 'Mangal', serif; color: #1f2937; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-size: 16px; line-height: 1.75;">
         
-        <!-- ===== WRAPPER ===== -->
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 0; padding: 20px 0; border: 0; width: 100%; background-color: #f9fafb; border-collapse: collapse;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" class="email-wrapper" style="margin: 0; padding: 24px 0; width: 100%; background-color: #f3f4f6; border-collapse: collapse;">
             <tr>
-                <td align="center" valign="top" style="margin: 0; padding: 0; border: 0;">
+                <td align="center" valign="top" style="padding: 0;">
                     
-                    <!-- ===== MAIN CONTAINER ===== -->
-                    <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; padding: 0; border: 0; width: 600px; max-width: 600px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); overflow: hidden; border-collapse: collapse;">
+                    <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" class="email-container" style="margin: 0 auto; width: 600px; max-width: 600px; background-color: #ffffff; border: 1px solid #d1d5db; border-collapse: collapse;">
                         
-                        <!-- ===== GIF HEADER ===== -->
+                        <!-- ===== HEADER ===== -->
                         <tr>
-                            <td align="center" valign="middle" style="margin: 0; padding: 0; border: 0;">
+                            <td align="center" valign="middle" style="padding: 0; border-bottom: 4px solid #111827;">
                                 <img
                                     src="https://www.vayuveg.com/images/WebSiteImg_email%20header.gif"
                                     alt="{{ brand_name }} Newsletter Header"
                                     width="600"
-                                    loading="lazy"
-                                    style="display: block; border: 0; line-height: 0; max-width: 100%; height: auto; width: 100%; max-width: 600px; margin: 0 auto;"
+                                    style="display: block; border: 0; line-height: 0; width: 100%; max-width: 600px; height: auto; margin: 0 auto;"
                                 />
                             </td>
                         </tr>
 
                         <!-- ===== SPOTIFY CTA ===== -->
                         <tr>
-                            <td align="center" valign="middle" style="margin: 0; padding: 24px; border: 0; border-top: 1px solid #d1fae5; border-bottom: 1px solid #d1fae5; text-align: center; background-color: #f0fdf4;">
-                                <p style="margin: 0; font-size: 16px; color: #374151; text-align: center;">
+                            <td align="center" valign="middle" class="spotify-box" style="padding: 22px 34px; border-bottom: 1px solid #d1d5db; background-color: #fafafa; text-align: center;">
+                                <p style="margin: 0; font-size: 15px; color: #374151; letter-spacing: 0.2px;">
                                     <strong lang="mr">
                                         Latest Infopack ऐकण्यासाठी
                                         <a
                                             href="{{ spotify_url }}"
                                             target="_blank"
-                                            style="text-decoration: none; color: #10b981; font-weight: 600;"
+                                            style="text-decoration: none; color: #047857; font-weight: 700; border-bottom: 1px solid #047857;"
                                         >
                                             Spotify चॅनल
                                         </a>
@@ -53,93 +116,132 @@
                         <!-- ===== ARTICLES ===== -->
                         {% for article in articles %}
                         <tr>
-                            <td valign="top" style="margin: 0; padding: 24px; border: 0; border-bottom: 1px solid #e5e7eb;">
-                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
-                                    <tr>
-                                        <!-- Image TD: Centered and Middled natively -->
-                                        <td width="40%" align="center" valign="middle" style="margin: 0; padding-right: 20px; border: 0;">
-                                            {% if article.image %}
+                            <td valign="top" class="content-padding" style="padding: 30px 32px; border-bottom: 1px solid #e5e7eb;">
+                                
+                                {% if article.image %}
+                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" class="article-table" style="border-collapse: collapse;">
+                                    <tr class="article-row">
+
+                                        {% if loop.index is odd %}
+                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding-right: 22px;">
                                             <img
                                                 src="{{ article.image }}"
                                                 alt="{{ article.title }}"
-                                                style="display: block; border: 0; line-height: 0; max-width: 100%; height: auto; width: 200px; max-width: 100%; border-radius: 8px; margin: 0 auto;"
+                                                width="200"
+                                                class="article-image"
+                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 200px; max-width: 100%; height: auto; margin: 0 auto;"
                                             />
-                                            {% endif %}
                                         </td>
 
-                                        <!-- Content TD -->
-                                        <td width="60%" valign="top" style="margin: 0; border: 0;">
-                                            <h3 style="margin: 0 0 12px; font-size: 18px; font-weight: 600; color: #2563eb; line-height: 1.4;">
-                                                <a
-                                                    href="{{ article.url }}"
-                                                    target="_blank"
-                                                    style="text-decoration: none; color: #2563eb;"
-                                                    >{{ article.title }}</a
-                                                >
+                                        <td width="62%" valign="top" class="text-cell" style="padding: 0;">
+                                            <h3 class="article-title" style="margin: 0 0 12px; font-size: 20px; font-weight: 700; color: #111827; line-height: 1.35;">
+                                                <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #111827;">
+                                                    {{ article.title }}
+                                                </a>
                                             </h3>
-                                            <p style="margin: 0 0 12px; font-size: 16px; color: #374151; text-align: justify;">{{ article.summary | safe }}</p>
-                                            <a
-                                                href="{{ article.url }}"
-                                                target="_blank"
-                                                style="text-decoration: none; font-weight: 600; color: #2563eb; display: inline-block; margin-top: 8px;"
-                                                >Read more →</a
-                                            >
+
+                                            <p class="article-summary" style="margin: 0 0 14px; font-size: 15.5px; color: #374151; text-align: justify;">
+                                                {{ article.summary | safe }}
+                                            </p>
+
+                                            <a href="{{ article.url }}" target="_blank" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
+                                                Read more →
+                                            </a>
+                                        </td>
+                                        {% else %}
+                                        <td width="62%" valign="top" class="text-cell" style="padding: 0 22px 0 0;">
+                                            <h3 class="article-title" style="margin: 0 0 12px; font-size: 20px; font-weight: 700; color: #111827; line-height: 1.35;">
+                                                <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #111827;">
+                                                    {{ article.title }}
+                                                </a>
+                                            </h3>
+
+                                            <p class="article-summary" style="margin: 0 0 14px; font-size: 15.5px; color: #374151; text-align: justify;">
+                                                {{ article.summary | safe }}
+                                            </p>
+
+                                            <a href="{{ article.url }}" target="_blank" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
+                                                Read more →
+                                            </a>
+                                        </td>
+
+                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding: 0;">
+                                            <img
+                                                src="{{ article.image }}"
+                                                alt="{{ article.title }}"
+                                                width="200"
+                                                class="article-image"
+                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 200px; max-width: 100%; height: auto; margin: 0 auto;"
+                                            />
+                                        </td>
+                                        {% endif %}
+
+                                    </tr>
+                                </table>
+
+                                {% else %}
+                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+                                    <tr>
+                                        <td width="100%" valign="top" style="padding: 0;">
+                                            <h3 class="article-title" style="margin: 0 0 12px; font-size: 21px; font-weight: 700; color: #111827; line-height: 1.35;">
+                                                <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #111827;">
+                                                    {{ article.title }}
+                                                </a>
+                                            </h3>
+
+                                            <p class="article-summary" style="margin: 0 0 14px; font-size: 16px; color: #374151; text-align: justify;">
+                                                {{ article.summary | safe }}
+                                            </p>
+
+                                            <a href="{{ article.url }}" target="_blank" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
+                                                Read more →
+                                            </a>
                                         </td>
                                     </tr>
                                 </table>
+                                {% endif %}
+
                             </td>
                         </tr>
                         {% endfor %}
 
                         <!-- ===== FOOTER ===== -->
                         <tr>
-                            <td align="center" valign="top" style="margin: 0; padding: 24px; border: 0; background-color: #1f2937;">
-                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
-                                    <tr>
-                                        <td align="center" valign="middle" style="margin: 0; padding-bottom: 16px; border: 0; text-align: center;">
-                                            {% for icon in social_links %}
-                                            <a
-                                                href="{{ icon.url }}"
-                                                target="_blank"
-                                                style="text-decoration: none; display: inline-block; padding: 0 8px;"
-                                            >
-                                                <img
-                                                    src="{{ icon.icon }}"
-                                                    width="28"
-                                                    height="28"
-                                                    alt="{{ icon.name }}"
-                                                    style="display: block; border: 0; line-height: 0; max-width: 100%; height: auto;"
-                                                />
-                                            </a>
-                                            {% endfor %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td valign="top" style="margin: 0; padding-bottom: 8px; border: 0;">
-                                            <hr style="border: none; border-top: 1px solid #374151; margin: 0;" />
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td align="center" valign="top" class="content-padding" style="padding: 28px 24px; background-color: #111827; border-top: 4px solid #374151;">
+                                
+                                <p style="margin: 0 0 14px; font-size: 14px; color: #e5e7eb; font-weight: 700; letter-spacing: 0.4px;">
+                                    Follow {{ brand_name }}
+                                </p>
 
-                                <p style="margin: 12px 0 8px; font-size: 13px; color: #9ca3af; text-align: center;">
-                                    <a
-                                        href="{{ unsubscribe_url }}"
-                                        style="color: #60a5fa; text-decoration: underline; font-weight: 500;"
-                                    >
+                                <p class="footer-links" style="margin: 0 0 18px; font-size: 14px; line-height: 2;">
+                                    <a href="https://www.facebook.com/VayuvegOfficial" target="_blank" style="color: #93c5fd; text-decoration: none; font-weight: 600; margin: 0 7px;">Facebook</a>
+                                    <span style="color: #6b7280;">|</span>
+                                    <a href="https://www.instagram.com/vayuvegofficial" target="_blank" style="color: #f9a8d4; text-decoration: none; font-weight: 600; margin: 0 7px;">Instagram</a>
+                                    <span style="color: #6b7280;">|</span>
+                                    <a href="https://www.youtube.com/@VayuvegOfficial" target="_blank" style="color: #fca5a5; text-decoration: none; font-weight: 600; margin: 0 7px;">YouTube</a>
+                                    <span style="color: #6b7280;">|</span>
+                                    <a href="https://x.com/vayuvegofficial" target="_blank" style="color: #e5e7eb; text-decoration: none; font-weight: 600; margin: 0 7px;">X</a>
+                                    <span style="color: #6b7280;">|</span>
+                                    <a href="https://open.spotify.com/show/0X23ATZVGrXCLXzR95DubJ" target="_blank" style="color: #86efac; text-decoration: none; font-weight: 600; margin: 0 7px;">Spotify</a>
+                                </p>
+
+                                <hr style="border: none; border-top: 1px solid #374151; margin: 0 0 16px;" />
+
+                                <p style="margin: 0 0 8px; font-size: 13px; color: #9ca3af; text-align: center;">
+                                    <a href="{{ unsubscribe_url }}" style="color: #93c5fd; text-decoration: underline; font-weight: 500;">
                                         Unsubscribe
                                     </a>
                                 </p>
 
                                 <p style="margin: 0; font-size: 13px; color: #9ca3af; text-align: center;">
                                     © {{ current_year }} {{ brand_name }} ·
-                                    <a
-                                        href="{{ site_url }}"
-                                        style="text-decoration: none; color: #60a5fa;"
-                                        >{{ site_url }}</a
-                                    >
+                                    <a href="{{ site_url }}" style="text-decoration: none; color: #93c5fd;">
+                                        {{ site_url }}
+                                    </a>
                                 </p>
                             </td>
                         </tr>
+
                     </table>
 
                 </td>
