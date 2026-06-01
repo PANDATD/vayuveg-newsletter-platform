@@ -24,6 +24,38 @@
                 word-break: break-word;
             }
 
+            .mobile-article-row {
+                display: none;
+                max-height: 0;
+                overflow: hidden;
+                mso-hide: all;
+            }
+
+            @media only screen and (min-width: 621px) {
+                .desktop-article-row {
+                    display: table-row !important;
+                }
+
+                .desktop-image-cell-left {
+                    width: 220px !important;
+                    padding: 0 24px 0 0 !important;
+                }
+
+                .desktop-image-cell-right {
+                    width: 220px !important;
+                    padding: 0 0 0 24px !important;
+                }
+
+                .desktop-text-cell {
+                    width: 316px !important;
+                }
+
+                .article-image {
+                    width: 196px !important;
+                    max-width: 196px !important;
+                }
+            }
+
             @media only screen and (max-width: 620px) {
                 body {
                     margin: 0 !important;
@@ -62,6 +94,19 @@
                     padding: 24px 18px !important;
                 }
 
+                .desktop-article-row {
+                    display: none !important;
+                    max-height: 0 !important;
+                    overflow: hidden !important;
+                    mso-hide: all !important;
+                }
+
+                .mobile-article-row {
+                    display: table-row !important;
+                    max-height: none !important;
+                    overflow: visible !important;
+                }
+
                 .article-table,
                 .article-row,
                 .image-cell,
@@ -71,7 +116,6 @@
                     max-width: 100% !important;
                 }
 
-                /* Important: reset desktop reverse direction on mobile */
                 .article-row-reverse {
                     direction: ltr !important;
                 }
@@ -185,20 +229,21 @@
                             <td valign="top" class="content-padding" style="padding: 30px 32px; border-bottom: 1px solid #e5e7eb;">
                                 
                                 {% if article.image %}
-                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" class="article-table" style="border-collapse: collapse;">
+                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" class="article-table" style="border-collapse: collapse; table-layout: fixed;">
                                     {% if loop.index is odd %}
-                                    <tr class="article-row">
-                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding: 0 22px 0 0;">
+                                    <!-- Desktop: image left, text right -->
+                                    <tr class="article-row desktop-article-row">
+                                        <td width="220" align="center" valign="top" class="image-cell desktop-image-cell-left" style="width: 220px; padding: 0 24px 0 0;">
                                             <img
                                                 src="{{ article.image }}"
                                                 alt="{{ article.title }}"
-                                                width="205"
+                                                width="196"
                                                 class="article-image"
-                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 205px; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px;"
+                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 196px; max-width: 196px; height: auto; margin: 0 auto; border-radius: 8px;"
                                             />
                                         </td>
 
-                                        <td width="62%" valign="top" class="text-cell" style="padding: 0;">
+                                        <td width="316" valign="top" class="text-cell desktop-text-cell" style="width: 316px; padding: 0;">
                                             <h3 class="article-title" style="margin: 0 0 12px; font-size: 20px; font-weight: 700; color: #111827; line-height: 1.35;">
                                                 <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #111827;">
                                                     {{ article.title }}
@@ -215,22 +260,9 @@
                                         </td>
                                     </tr>
                                     {% else %}
-                                    <!--
-                                        DOM order remains image first for mobile.
-                                        direction: rtl keeps the image visually on the right on desktop.
-                                    -->
-                                    <tr class="article-row article-row-reverse" style="direction: rtl;">
-                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding: 0 0 0 22px; direction: ltr;">
-                                            <img
-                                                src="{{ article.image }}"
-                                                alt="{{ article.title }}"
-                                                width="205"
-                                                class="article-image"
-                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 205px; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px;"
-                                            />
-                                        </td>
-
-                                        <td width="62%" valign="top" class="text-cell" style="padding: 0; direction: ltr;">
+                                    <!-- Desktop: text left, image right for clear Z pattern -->
+                                    <tr class="article-row desktop-article-row">
+                                        <td width="316" valign="top" class="text-cell desktop-text-cell" style="width: 316px; padding: 0;">
                                             <h3 class="article-title" style="margin: 0 0 12px; font-size: 20px; font-weight: 700; color: #111827; line-height: 1.35;">
                                                 <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #111827;">
                                                     {{ article.title }}
@@ -245,8 +277,48 @@
                                                 Read more →
                                             </a>
                                         </td>
+
+                                        <td width="220" align="center" valign="top" class="image-cell desktop-image-cell-right" style="width: 220px; padding: 0 0 0 24px;">
+                                            <img
+                                                src="{{ article.image }}"
+                                                alt="{{ article.title }}"
+                                                width="196"
+                                                class="article-image"
+                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 196px; max-width: 196px; height: auto; margin: 0 auto; border-radius: 8px;"
+                                            />
+                                        </td>
                                     </tr>
                                     {% endif %}
+
+                                    <!-- Mobile: always image first, then text. Desktop row above keeps the Z pattern. -->
+                                    <tr class="article-row mobile-article-row">
+                                        <td width="100%" align="center" valign="top" class="image-cell" style="padding: 0 0 16px 0; text-align: center;">
+                                            <img
+                                                src="{{ article.image }}"
+                                                alt="{{ article.title }}"
+                                                width="360"
+                                                class="article-image"
+                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 100%; max-width: 360px; height: auto; margin: 0 auto; border-radius: 10px;"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr class="article-row mobile-article-row">
+                                        <td width="100%" valign="top" class="text-cell" style="padding: 0; text-align: left;">
+                                            <h3 class="article-title" style="margin: 0 0 12px; font-size: 20px; font-weight: 700; color: #111827; line-height: 1.35;">
+                                                <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #111827;">
+                                                    {{ article.title }}
+                                                </a>
+                                            </h3>
+
+                                            <p class="article-summary" style="margin: 0 0 14px; font-size: 15.5px; color: #374151; text-align: left;">
+                                                {{ article.summary | safe }}
+                                            </p>
+
+                                            <a href="{{ article.url }}" target="_blank" class="read-more-link" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
+                                                Read more →
+                                            </a>
+                                        </td>
+                                    </tr>
                                 </table>
 
                                 {% else %}
