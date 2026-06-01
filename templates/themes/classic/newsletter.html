@@ -8,31 +8,72 @@
         <title>{{ brand_name }} Newsletter</title>
 
         <style>
+            /* Safe email resets */
+            table {
+                border-spacing: 0;
+                border-collapse: collapse;
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+            }
+
+            img {
+                -ms-interpolation-mode: bicubic;
+            }
+
+            a {
+                word-break: break-word;
+            }
+
             @media only screen and (max-width: 620px) {
+                body {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    width: 100% !important;
+                }
+
                 .email-wrapper {
                     padding: 0 !important;
+                    background-color: #ffffff !important;
                 }
 
                 .email-container {
                     width: 100% !important;
                     max-width: 100% !important;
-                    border-radius: 0 !important;
                     border-left: 0 !important;
                     border-right: 0 !important;
                 }
 
+                .header-image {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: auto !important;
+                }
+
+                .spotify-box {
+                    padding: 17px 16px !important;
+                }
+
+                .spotify-box p {
+                    font-size: 14.5px !important;
+                    line-height: 1.65 !important;
+                }
+
                 .content-padding {
-                    padding: 22px 18px !important;
+                    padding: 24px 18px !important;
                 }
 
                 .article-table,
                 .article-row,
-                .article-cell,
                 .image-cell,
                 .text-cell {
                     display: block !important;
                     width: 100% !important;
                     max-width: 100% !important;
+                }
+
+                /* Important: reset desktop reverse direction on mobile */
+                .article-row-reverse {
+                    direction: ltr !important;
                 }
 
                 .image-cell {
@@ -42,16 +83,20 @@
 
                 .text-cell {
                     padding: 0 !important;
+                    text-align: left !important;
                 }
 
                 .article-image {
+                    display: block !important;
                     width: 100% !important;
-                    max-width: 100% !important;
+                    max-width: 360px !important;
                     height: auto !important;
                     margin: 0 auto !important;
+                    border-radius: 10px !important;
                 }
 
                 .article-title {
+                    margin-bottom: 10px !important;
                     font-size: 19px !important;
                     line-height: 1.35 !important;
                 }
@@ -62,13 +107,33 @@
                     text-align: left !important;
                 }
 
-                .spotify-box {
-                    padding: 18px 16px !important;
+                .read-more-link {
+                    padding-top: 2px !important;
+                    font-size: 15px !important;
                 }
 
-                .footer-links a {
+                .footer-links a,
+                .footer-links span {
                     display: inline-block !important;
-                    margin: 4px 6px !important;
+                    margin: 3px 5px !important;
+                }
+            }
+
+            @media only screen and (max-width: 420px) {
+                .content-padding {
+                    padding: 22px 15px !important;
+                }
+
+                .article-image {
+                    max-width: 100% !important;
+                }
+
+                .article-title {
+                    font-size: 18px !important;
+                }
+
+                .article-summary {
+                    font-size: 15px !important;
                 }
             }
         </style>
@@ -89,6 +154,7 @@
                                     src="https://www.vayuveg.com/images/WebSiteImg_email%20header.gif"
                                     alt="{{ brand_name }} Newsletter Header"
                                     width="600"
+                                    class="header-image"
                                     style="display: block; border: 0; line-height: 0; width: 100%; max-width: 600px; height: auto; margin: 0 auto;"
                                 />
                             </td>
@@ -97,7 +163,7 @@
                         <!-- ===== SPOTIFY CTA ===== -->
                         <tr>
                             <td align="center" valign="middle" class="spotify-box" style="padding: 22px 34px; border-bottom: 1px solid #d1d5db; background-color: #fafafa; text-align: center;">
-                                <p style="margin: 0; font-size: 15px; color: #374151; letter-spacing: 0.2px;">
+                                <p style="margin: 0; font-size: 15px; color: #374151; letter-spacing: 0.2px; line-height: 1.65;">
                                     <strong lang="mr">
                                         Latest Infopack ऐकण्यासाठी
                                         <a
@@ -120,16 +186,15 @@
                                 
                                 {% if article.image %}
                                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" class="article-table" style="border-collapse: collapse;">
+                                    {% if loop.index is odd %}
                                     <tr class="article-row">
-
-                                        {% if loop.index is odd %}
-                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding-right: 22px;">
+                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding: 0 22px 0 0;">
                                             <img
                                                 src="{{ article.image }}"
                                                 alt="{{ article.title }}"
-                                                width="200"
+                                                width="205"
                                                 class="article-image"
-                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 200px; max-width: 100%; height: auto; margin: 0 auto;"
+                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 205px; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px;"
                                             />
                                         </td>
 
@@ -144,12 +209,28 @@
                                                 {{ article.summary | safe }}
                                             </p>
 
-                                            <a href="{{ article.url }}" target="_blank" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
+                                            <a href="{{ article.url }}" target="_blank" class="read-more-link" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
                                                 Read more →
                                             </a>
                                         </td>
-                                        {% else %}
-                                        <td width="62%" valign="top" class="text-cell" style="padding: 0 22px 0 0;">
+                                    </tr>
+                                    {% else %}
+                                    <!--
+                                        DOM order remains image first for mobile.
+                                        direction: rtl keeps the image visually on the right on desktop.
+                                    -->
+                                    <tr class="article-row article-row-reverse" style="direction: rtl;">
+                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding: 0 0 0 22px; direction: ltr;">
+                                            <img
+                                                src="{{ article.image }}"
+                                                alt="{{ article.title }}"
+                                                width="205"
+                                                class="article-image"
+                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 205px; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px;"
+                                            />
+                                        </td>
+
+                                        <td width="62%" valign="top" class="text-cell" style="padding: 0; direction: ltr;">
                                             <h3 class="article-title" style="margin: 0 0 12px; font-size: 20px; font-weight: 700; color: #111827; line-height: 1.35;">
                                                 <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #111827;">
                                                     {{ article.title }}
@@ -160,23 +241,12 @@
                                                 {{ article.summary | safe }}
                                             </p>
 
-                                            <a href="{{ article.url }}" target="_blank" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
+                                            <a href="{{ article.url }}" target="_blank" class="read-more-link" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
                                                 Read more →
                                             </a>
                                         </td>
-
-                                        <td width="38%" align="center" valign="top" class="image-cell" style="padding: 0;">
-                                            <img
-                                                src="{{ article.image }}"
-                                                alt="{{ article.title }}"
-                                                width="200"
-                                                class="article-image"
-                                                style="display: block; border: 1px solid #d1d5db; line-height: 0; width: 200px; max-width: 100%; height: auto; margin: 0 auto;"
-                                            />
-                                        </td>
-                                        {% endif %}
-
                                     </tr>
+                                    {% endif %}
                                 </table>
 
                                 {% else %}
@@ -193,7 +263,7 @@
                                                 {{ article.summary | safe }}
                                             </p>
 
-                                            <a href="{{ article.url }}" target="_blank" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
+                                            <a href="{{ article.url }}" target="_blank" class="read-more-link" style="text-decoration: none; font-weight: 700; color: #1d4ed8; display: inline-block; border-bottom: 1px solid #1d4ed8;">
                                                 Read more →
                                             </a>
                                         </td>
