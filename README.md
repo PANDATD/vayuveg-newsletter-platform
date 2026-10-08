@@ -1,2 +1,11 @@
-# vayuveg-newsletter-platform
-A Python Flask–based newsletter automation platform for building, previewing, and exporting production-ready, email-safe HTML newsletters, designed to streamline editorial workflows and reduce repetitive content publishing tasks.
+# VAYUVEG Newsletter Platform
+
+A Flask application for creating, previewing, and exporting newsletters.
+
+## Purpose
+
+The project focuses on newsletter content and HTML generation workflows. Specific deployment, delivery, and production capabilities should be verified from the current application configuration.
+
+## Author
+
+Tejas Dixit — https://tejasdixit.in
